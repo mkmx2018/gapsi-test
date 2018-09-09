@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the gapsi test",
+    "version": "1.0.0",
+    "title": "Gapsi Item Api Services",
+    "termsOfService": "http://swagger.io/terms/"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/item/{id}": {
+      "get": {
+        "tags": [
+          "item"
+        ],
+        "summary": "Find Item",
+        "description": "For valid response try alphanumeric.            Other values will generated exceptions",
+        "operationId": "getItemById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the Item to be fetched",
+            "required": true,
+            "type": "string",
+            "maximum": 10,
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Item not found"
+          }
+        }
+      }
+    },
+    "/item": {
+      "put": {
+        "tags": [
+          "item"
+        ],
+        "summary": "Update an existing Item",
+        "description": "",
+        "operationId": "updateItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ItemUpd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Item not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "idetification of the product"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "model": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Item"
+      }
+    },
+    "ItemUpd": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "idetification of the product"
+        },
+        "description": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "ItemUpd"
+      }
+    }
+  }
+}
